@@ -1,0 +1,108 @@
+<div class="navigation col-lg-1" *ngIf="identity">
+	<h1 class="head-title">
+		<a [routerLink]="['/']">			
+			<span aria-hidden="true"><img id="img-logo" src="assets/images/logo.png" alt="" /></span>
+	   	{{title}}
+		</a>
+	</h1>
+	<br>
+	<nav id="navigation">
+		<a [routerLink]="['/']">
+			<i class="fa fa-home" aria-hidden="true"></i>
+			Inicio
+		</a>
+		<a [routerLink]="['/buscar']" [routerLinkActive]="['actived']">			
+			<i class="fa fa-search" aria-hidden="true"></i>
+			Buscar
+		</a>
+		<a [routerLink]="['/artistas', 1]" [routerLinkActive]="['actived']">
+			<i class="fa fa-music" aria-hidden="true"></i>
+			Artistas
+		</a>
+		<a [routerLink]="['/albums']" [routerLinkActive]="['actived']">
+			<i class="fa fa-book" aria-hidden="true"></i>
+			Albums
+		</a>
+		<a [routerLink]="['/mis-canciones']" [routerLinkActive]="['actived']">
+			<i class="fa fa-list" aria-hidden="true"></i>
+			Playlist
+		</a>
+	</nav>	
+</div>
+<div *ngIf="identity">
+  <ul class="nav navbar-nav navbar-right" id="user_logged">
+		<div class="user-image">
+			<img id="image-logged" src="{{url + 'get-image-user/' + identity.image}}" />
+		</div>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <span id="identity_name">
+          {{identity.name}}
+        </span>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            Perfil
+          </a>
+        </li>
+        <li>
+          <a (click)="logout()" class="btn-logout">			
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            Salir
+          </a>
+        </li>
+      </ul>
+    </li>    			
+	</ul>
+</div>
+
+<div [class.hidden]="!identity" class="central col-lg-11">
+	<router-outlet></router-outlet>
+	<div class="clearfix"></div>
+	<player class="player" *ngIf="identity"></player>
+</div>
+
+<div class="wrapper-login" *ngIf="!identity && !isReg && !isLanding">
+	<div class="form-box animated fadeInUp">
+		<div *ngIf="errorMessage && errorMessage!=null">
+			<div class="alert alert-info">
+			  <strong>Error: </strong> {{errorMessage}}
+			</div>
+		</div>
+		<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+			<img src="assets/images/spotify-logo.png" alt="" class="logo">
+			<h1 class="form-title">Iniciar sesión</h1>			
+			<input type="email" placeholder="Email" #email="ngModel" name="email" [(ngModel)]="user.email" (click)="clickInput()" required />
+			<span *ngIf="!email.valid && email.touched">
+				El email es obligatorio
+			</span>			
+			<input type="password" placeholder="Password" #password="ngModel" name="password" [(ngModel)]="user.password" (click)="clickInput()" required />
+			<span *ngIf="!password.valid && password.touched">
+				La contraseña es obligatoria
+			</span>
+			<button type="submit">
+				Login
+			</button>									
+		</form>
+		<div class="register">
+			¿No tienes cuenta? <a (click)="onRegister()" class="btn-logout">Regístrate</a>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper-login" *ngIf="!identity && isReg &&!isLanding">
+	<div class="form-box animated fadeInUp">		
+		<app-user-register></app-user-register>
+		<div class="register">
+			<a (click)="onRegister()" class="btn-logout">Volver</a>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="!identity && isLanding">
+	<app-landing (eventFromChild)="onCapture($event)"></app-landing>	
+</div>
+

@@ -1,0 +1,23 @@
+<div *ngIf="alertRegister">
+	<div class="alert alert-info">
+	  {{alertRegister}}
+	</div>
+</div>    
+<form #registerForm="ngForm" (ngSubmit)="onSubmitRegister()">
+	<h1 class="form-title">Crear cuenta</h1>  			
+	<input type="text" placeholder="Nombre" #name="ngModel" name="name" [(ngModel)]="user_register.name" required />
+			
+	<input type="text" placeholder="Apellidos" #surname="ngModel" name="surname" [(ngModel)]="user_register.surname" required />
+			
+	<input type="email" placeholder="Email" #email="ngModel" name="email" [(ngModel)]="user_register.email" required />
+	<span *ngIf="!email.valid && email.touched">
+		El email es obligatorio
+	</span>			
+	<input type="password" placeholder="Password" #password="ngModel" name="password" [(ngModel)]="user_register.password" required />
+	<span *ngIf="!password.valid && password.touched">
+		La contraseña es obligatoria
+	</span>						
+	<button type="submit">
+		Regístrate
+	</button>
+</form>

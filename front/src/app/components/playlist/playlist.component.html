@@ -1,0 +1,45 @@
+<div class="album-box" >
+	<div id="album-head-card" *ngIf="album">
+		<div class="image">
+			<img src="{{ url + 'get-image-album/' + album.image }}" />
+		</div>
+		<div class="data">
+			<h1>{{album.title}}</h1>
+			<p><strong>{{album.artist.name}}</strong></p>
+			<p>{{album.year}}</p>
+			<p>{{album.description}}</p>
+			<a [routerLink]="['/crear-tema', album._id]" class="btn btn-default" *ngIf="identity.role == 'ROLE_ADMIN'">
+				Añadir canción
+			</a>
+		</div>
+	</div>
+  <div class="clearfix"></div>
+  <div *ngIf="alertPlaylist">
+    <div class="alert alert-info">
+      {{alertMessage}}
+    </div>
+  </div>
+	<div id="gallery-songs" *ngIf="songs">
+		<ul id="songs-list">
+			<li *ngFor="let song of songs" class="song-item">
+				<div class="title">
+					<a class="btn btn-success" (click)="startPlayer(song.song)">
+						<span class="fa fa-play" aria-hidden="true"></span>
+					</a>
+
+					{{song.song.number + '. '+ song.song.name + ' - '+ song.song.duration}}
+
+          <span class="favorite">
+            &nbsp;&nbsp;<button (click)="deleteFavorite(song.song._id)"><i class="fa fa-minus"></i></button>
+          </span>
+					<div class="buttons" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+						<a [routerLink]="['/editar-tema', song.song._id]" class="btn btn-warning">
+							Editar
+						</a>						
+					</div>					
+					<div class="clearfix"></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

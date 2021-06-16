@@ -1,0 +1,18 @@
+<div class="col-lg-6">
+	<h1>{{titulo}}</h1>
+
+	<div *ngIf="alertMessage">
+		<div class="alert alert-info">
+		  {{alertMessage}}
+		</div>
+	</div>
+
+	<form #formArtist="ngForm" (ngSubmit)="onSubmit()">
+		<p>
+			<label>Nombre o Descripción</label>
+			<input type="text" #name="ngModel" name="name" [(ngModel)]="searchString" required class="form-control" />			
+		</p>		
+		<input type="submit" value="{{titulo}}" [disabled]="!formArtist.form.valid" class="btn btn-success" />
+	</form>
+</div>
+
