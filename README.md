@@ -1,9 +1,15 @@
 # proyectoDAW
 Proyecto Despliegue de Aplicaciones Web
 
-URL aplicación desplegada en remoto:
+URL aplicación desplegada en remoto (MongoDB Atlas, Heroku, Github Pages):
 
 https://jal535c.github.io/spotify/
+
+-Usuario administrador:
+
+email: admin@admin.com
+
+password: 1234
 
 
 Instrucciones de uso local en Windows:
@@ -12,6 +18,9 @@ Instrucciones de uso local en Windows:
 -Instalar MongoDB
 
 -Lanzar el servicio mongod.exe
+
+-Restaurar la base de datos: 
+ mongorestore -d spotify_db mongodb_files/spotify_db
 
 # Backend:
 -Instalar Node.js y npm
