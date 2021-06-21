@@ -7,6 +7,17 @@ Gestión de contenido musical, similar a Spotify.
 * Node.js
 * Angular
 
+## Módulos y Librerías usadas
+* Mongoose
+* Express
+* JWT
+* Bcrypt
+* Moment
+* Cors
+* Connect Multiparty
+* Jquery
+* Bootstrap
+
 ## Despliegue
 Plataformas utilizadas para desplegar las distintas partes del proyecto:
 * MongoDB Atlas
@@ -35,9 +46,9 @@ git clone https://github.com/jal535c/proyectoDAW.git
 mongorestore -d spotify_db mongodb_files/spotify_db
 ```
 
-## Backend:
+### Backend:
 * Instalar Node.js y npm
-* Acceder a la carpeta back:  
+* Acceder a la carpeta back del proyecto clonado:  
 ```bash
 cd back
 ```
@@ -55,7 +66,7 @@ npm run dev
 ```bash 
 npm install -g @angular/cli
 ```
-* Acceder a la carpeta front:  
+* Acceder a la carpeta front del proyecto clonado:  
 ```bash 
 cd front
 ```
@@ -68,8 +79,7 @@ npm install
 ng serve
 ```
 * Acceder a la aplicación desde el navegador en el puerto por defecto:  
-
-http://localhost:4200
+ http://localhost:4200
 
 
 
